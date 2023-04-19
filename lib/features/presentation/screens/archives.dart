@@ -19,6 +19,17 @@ class _ArchivesTabState extends State<ArchivesTab> {
       child: BlocBuilder<ArchivesCubit, ArchivesState>(
         builder: (context, state) {
           if (state is ArchivesCubitLoadSuccess) {
+            if (state.verses.isEmpty) {
+              return const Center(
+                child: Text(
+                  'لايوجد محفوظات بعد',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 30,
+                  ),
+                ),
+              );
+            }
             return ReorderableListView.builder(
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
@@ -48,7 +59,13 @@ class _ArchivesTabState extends State<ArchivesTab> {
             );
           } else {
             return const Center(
-              child: Text('لقد حدث خطأ ما'),
+              child: Text(
+                'لقد حدث خطأ ما',
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 30,
+                ),
+              ),
             );
           }
         },

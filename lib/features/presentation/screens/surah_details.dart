@@ -27,30 +27,30 @@ class _SurahScreenState extends State<SurahScreen> {
   final ItemScrollController itemScrollController = ItemScrollController();
   final ItemPositionsListener itemPositionsListener =
       ItemPositionsListener.create();
-  var isLoaded = false;
-  int? startingIndex;
+  // var isLoaded = false;
+  // int? startingIndex;
 
-  @override
-  void initState() {
-    if (widget.startingVerseNumber != null) {
-      startingIndex = widget.startingVerseNumber! - 1;
-    }
-    void onListLoad() {
-      if (!isLoaded) {
-        isLoaded = true;
-        return;
-      }
-      setState(() {
-        startingIndex = null;
-      });
-      itemPositionsListener.itemPositions.removeListener(onListLoad);
-      // log(itemPositionsListener.itemPositions.value.toString());
-    }
+  // @override
+  // void initState() {
+  //   if (widget.startingVerseNumber != null) {
+  //     startingIndex = widget.startingVerseNumber! - 1;
+  //   }
+  //   void onListLoad() {
+  //     if (!isLoaded) {
+  //       isLoaded = true;
+  //       return;
+  //     }
+  //     setState(() {
+  //       startingIndex = null;
+  //     });
+  //     itemPositionsListener.itemPositions.removeListener(onListLoad);
+  //     // log(itemPositionsListener.itemPositions.value.toString());
+  //   }
 
-    itemPositionsListener.itemPositions.addListener(onListLoad);
+  //   itemPositionsListener.itemPositions.addListener(onListLoad);
 
-    super.initState();
-  }
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +92,7 @@ class _SurahScreenState extends State<SurahScreen> {
                 ),
                 Expanded(
                   child: ScrollablePositionedList.builder(
-                    initialScrollIndex: startingIndex ?? 0,
+                    initialScrollIndex: (widget.startingVerseNumber ?? 1) - 1,
                     itemPositionsListener: itemPositionsListener,
                     itemScrollController: itemScrollController,
                     physics: const BouncingScrollPhysics(),
@@ -107,9 +107,10 @@ class _SurahScreenState extends State<SurahScreen> {
                           bottom: 10,
                         ),
                         child: Material(
-                          color: index == startingIndex
-                              ? Colors.amber
-                              : ColorsManager.primary.withAlpha(30),
+                          color:
+                              index == ((widget.startingVerseNumber ?? 0) - 1)
+                                  ? Colors.amber
+                                  : ColorsManager.primary.withAlpha(30),
                           child: InkWell(
                             onLongPress: () {
                               cubit.insertToDatabase(verse: verse);

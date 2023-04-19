@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quran_reader/core/helpers/cache_network.dart';
 import 'package:quran_reader/core/themes/theme_manager.dart';
 import 'package:quran_reader/features/data/repo/verses_repo.dart';
 import 'package:quran_reader/features/presentation/controller/cubit/quran_cubit.dart';

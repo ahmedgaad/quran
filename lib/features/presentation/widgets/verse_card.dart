@@ -34,7 +34,6 @@ class VerseCard extends StatelessWidget {
         },
         child: Container(
           width: double.infinity,
-          height: 60.0,
           padding: const EdgeInsets.all(10),
           child: Text(
             verse.verseContent,
